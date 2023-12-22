@@ -1,0 +1,6 @@
+#test
+#Fri Dec 22 11:34:22 ICT 2023
+country=Vietnam
+password=12345678
+name=Phat
+email=wow@gmail.com
