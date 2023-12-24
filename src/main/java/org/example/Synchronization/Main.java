@@ -7,18 +7,18 @@ public class Main {
 
         // Create a shared list
         List<Integer> sharedList = new ArrayList<>();
-        //        sharedList = Collections.synchronizedList(sharedList);
+        sharedList = Collections.synchronizedList(sharedList);
         Set<Integer> sharedSet = new HashSet<>();
 //        sharedSet = Collections.synchronizedSet(sharedSet);
         Map<Integer, Integer> sharedMap = new HashMap<>();
-        sharedMap = Collections.synchronizedMap(sharedMap);
+//        sharedMap = Collections.synchronizedMap(sharedMap);
         int n = 30;
 
         // Create four threads that add elements to the list
-//        Thread thread1 = new Thread(new SyncVsUnsync.AddToList(sharedList, n, 1));
-//        Thread thread2 = new Thread(new SyncVsUnsync.AddToList(sharedList, n, 2));
-//        Thread thread3 = new Thread(new SyncVsUnsync.AddToList(sharedList, n, 3));
-//        Thread thread4 = new Thread(new SyncVsUnsync.AddToList(sharedList, n, 4));
+        Thread thread1 = new Thread(new AddToList(sharedList, n, 1));
+        Thread thread2 = new Thread(new AddToList(sharedList, n, 2));
+        Thread thread3 = new Thread(new AddToList(sharedList, n, 3));
+        Thread thread4 = new Thread(new AddToList(sharedList, n, 4));
 
         // Create four threads that add elements to the set
 //        Thread thread1 = new Thread(new SyncVsUnsync.AddToSet(sharedSet, n, 1));
@@ -27,10 +27,10 @@ public class Main {
 //        Thread thread4 = new Thread(new SyncVsUnsync.AddToSet(sharedSet, n, 4));
 
         // Create four threads that add elements to the map
-        Thread thread1 = new Thread(new AddToMap(sharedMap, n, 1));
-        Thread thread2 = new Thread(new AddToMap(sharedMap, n, 2));
-        Thread thread3 = new Thread(new AddToMap(sharedMap, n, 3));
-        Thread thread4 = new Thread(new AddToMap(sharedMap, n, 4));
+//        Thread thread1 = new Thread(new AddToMap(sharedMap, n, 1));
+//        Thread thread2 = new Thread(new AddToMap(sharedMap, n, 2));
+//        Thread thread3 = new Thread(new AddToMap(sharedMap, n, 3));
+//        Thread thread4 = new Thread(new AddToMap(sharedMap, n, 4));
 
         // Start the threads
         thread1.start();
@@ -49,8 +49,8 @@ public class Main {
         }
 
         // Print the final contents of the list
-        System.out.println("Final: " + sharedMap);
-        System.out.println("Size: " + sharedMap.size());
+        System.out.println("Final: " + sharedList);
+        System.out.println("Size: " + sharedList.size());
 
     }
 }
