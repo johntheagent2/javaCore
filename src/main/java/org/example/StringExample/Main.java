@@ -13,9 +13,7 @@ public class Main {
         Thread thread2 = new Thread(new StringMultiThread(stringBuffer, stringBuilder, n, 2));
         Thread thread3 = new Thread(new StringMultiThread(stringBuffer, stringBuilder, n, 3));
         Thread thread4 = new Thread(new StringMultiThread(stringBuffer, stringBuilder, n, 4));
-//        Thread thread2 = new Thread(new StringMultiThread(stringBuffer, n, 2));
-//        Thread thread3 = new Thread(new StringMultiThread(stringBuffer, n, 3));
-//        Thread thread4 = new Thread(new StringMultiThread(stringBuffer, n, 4));
+
 
         thread1.start();
         thread2.start();
