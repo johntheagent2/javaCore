@@ -142,8 +142,8 @@ class main{
         print("Resource Bundle");
         Locale localeEn = new Locale("en");
         Locale localeVn = new Locale("vn");
-        ResourceBundle labelsUS = ResourceBundle.getBundle("src/main/java/org/example/UntilLibrary/lang/label", localeEn);
-        ResourceBundle labelsVN = ResourceBundle.getBundle("src/main/java/org/example/UntilLibrary/lang/label", localeVn);
+        ResourceBundle labelsUS = ResourceBundle.getBundle("lang/label", localeEn);
+        ResourceBundle labelsVN = ResourceBundle.getBundle("lang/label", localeVn);
         System.out.println(labelsUS.getString("GREETING"));
         System.out.println(labelsVN.getString("GREETING"));
         printDevider();
