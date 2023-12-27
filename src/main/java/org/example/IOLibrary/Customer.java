@@ -34,4 +34,9 @@ public class Customer {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public void introduce(){
+        System.out.println("My name is " + this.name + " and I'm " + this.age);
+    }
+
 }

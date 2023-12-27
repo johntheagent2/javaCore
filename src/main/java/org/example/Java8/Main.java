@@ -3,6 +3,9 @@ package org.example.Java8;
 import org.example.IOLibrary.Customer;
 
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.random.RandomGenerator;
 import java.util.stream.Collectors;
 
@@ -13,7 +16,49 @@ public class Main {
 //        streamExample2();
 //        optionalExample();
 //        parallelStreamAPIExample();
-        mapExample();
+//        mapExample();
+//        testLambdaExpression();
+    }
+
+    public static void testLambdaExpression(){
+//        Reference to a Static Method
+        Function<String, String> myFunc = functionalReferenceExample::sayBye;
+        System.out.println(myFunc.apply("Bob"));
+
+
+//        Reference to an Instance Method of a Particular Object
+        Customer customerA = new Customer("CDP", "address", 20);
+        Runnable introduce = customerA::introduce;
+        introduce.run();
+
+//        Reference to an Instance Method of an Arbitrary Object of a Particular Type
+        List<String> fruits = Arrays.asList("apple", "melon", "orange", "grape");
+        Consumer<String> printReference = System.out::println;
+
+        fruits.forEach(printReference);
+
+//        Reference to a Constructor
+        TriFunction<String, String, Integer, Customer> createCustomer = Customer::new;
+        Customer customerB = createCustomer.apply("TTNA", "address1", 22);
+
+        Runnable introduce1 = customerB::introduce;
+        introduce1.run();
+    }
+
+    interface  TriFunction<T, U, V, R>{
+        R apply(T t, U u, V v);
+    }
+
+    interface functionalReferenceExample{
+        void sayHello(String name);
+
+        default String sayIntro(String name){
+            return "my name is " + name;
+        }
+
+        static String sayBye(String name){
+            return name + " says bye!";
+        }
     }
 
     public static void mapExample(){
@@ -52,30 +97,68 @@ public class Main {
 
     public static void optionalExample(){
         // Creating an Optional with a non-null value
-        Optional<String> nameOptional = Optional.of("John");
+        Optional<String> nonNullOptional = Optional.of("Hello, Java 8!");
+
+        // Creating an Optional with a potentially null value
+        String nullableValue = "This might be null";
+        Optional<String> nullableOptional = Optional.ofNullable(nullableValue);
 
         // Creating an empty Optional
         Optional<String> emptyOptional = Optional.empty();
 
-        // Checking if the Optional has a value
-        if (nameOptional.isPresent()) {
-            System.out.println("Name: " + nameOptional.get());
-        } else {
-            System.out.println("Name is absent.");
+        // isPresent() - Check if a value is present
+        System.out.println("nonNullOptional is present: " + nonNullOptional.isPresent());
+        System.out.println("emptyOptional is present: " + emptyOptional.isPresent());
+
+        // ifPresent() - Execute a block of code if a value is present
+        nonNullOptional.ifPresent(value -> System.out.println("Value present: " + value));
+        emptyOptional.ifPresent(value -> System.out.println("This won't be printed"));
+
+        // orElse() - Get the value if present, otherwise return a default value
+        String result1 = nonNullOptional.orElse("Default Value");
+        String result2 = emptyOptional.orElse("Default Value");
+
+        System.out.println("Result1: " + result1);
+        System.out.println("Result2: " + result2);
+
+        // orElseGet() - Get the value if present, otherwise invoke a supplier
+        String result3 = nonNullOptional.orElseGet(supplierDefault::supply);
+        String result4 = emptyOptional.orElseGet(supplierDefault::supply);
+
+        System.out.println("Result3: " + result3);
+        System.out.println("Result4: " + result4);
+
+        // orElseThrow() - Get the value if present, otherwise throw an exception
+        try {
+            String result5 = emptyOptional.orElseThrow(() -> new IllegalArgumentException("Value is absent"));
+        } catch (IllegalArgumentException e) {
+            System.out.println("Exception caught: " + e.getMessage());
         }
 
-        // Using orElse to provide a default value if the Optional is empty
-        String defaultName = emptyOptional.orElse("Default");
-        System.out.println("Default Name: " + defaultName);
+        // map() - Transform the value if present
+        String transformedValue = nonNullOptional
+                .map(s -> s + " - Transformed")
+                .orElse("Default Value");
+        System.out.println("Transformed Value: " + transformedValue);
 
-        // Using ifPresent to perform an action if the Optional has a value
-        nameOptional.ifPresent(name -> System.out.println("Length of Name: " + name.length()));
+        // filter() - Apply a condition to the value
+        Optional<String> filteredOptional = nonNullOptional.filter(s -> s.contains("Java"));
+        System.out.println("Filtered Optional: " + filteredOptional.orElse("No match"));
 
-        // Example of chaining methods
-        String result = nameOptional.map(String::toUpperCase)
-                .orElse("No value")
-                .concat("!");
-        System.out.println("Result: " + result);
+        // flatMap() - Transform the value and flatten the result
+        Optional<String> flatMappedOptional = nonNullOptional.flatMap(s -> Optional.of(s + " - FlatMapped"));
+        Optional<Optional<String>> nestedOptional = nonNullOptional.map(s -> Optional.of(s + " - FlatMapped"));
+
+        System.out.println("FlatMapped Optional: " + flatMappedOptional.orElse("Default Value"));
+        System.out.println("Mapped Nested Optional: " + nestedOptional.orElse(Optional.of("Default Value")));
+    }
+
+    interface supplierDefault{
+        void create();
+
+        static String supply(){
+            return "Default supplier";
+        }
     }
 
     public static void streamExample2(){
@@ -130,6 +213,14 @@ public class Main {
         }finally {
             genZCustomers.forEach(customer -> System.out.println(customer.getName() + " " + customer.getAge()));
         }
+
+        Map<Integer, Customer> mapOfCustomer = customers.stream()
+                .collect(Collectors.toMap(customers::indexOf, (customer) -> customer));
+
+        mapOfCustomer.forEach((key, customer) -> {
+            System.out.print(key + " ");
+            customer.introduce();
+        });
     }
 
     public static void functionalInterfaceExample(){
@@ -140,7 +231,7 @@ public class Main {
         };
         cat.makeSound("meow", 2);
         cat.move();
-        Animal.commonBehavior();
+        Animal.comeAlive();
 
         Animal bob = new Human();
         bob.makeSound("hi", 3);
@@ -168,7 +259,7 @@ interface Animal {
     }
 
     // Static method
-    static void commonBehavior() {
+    static void comeAlive() {
         System.out.println("All animals share some common behaviors.");
     }
 }
