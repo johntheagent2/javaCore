@@ -10,7 +10,7 @@ class main{
         List<Integer> arrList = new ArrayList<>();
 
         listExample(arrList, arr);
-        linkedListExample(arrList);
+        linkedListExample(arrList, arr);
         stackExample(arr);
         hashMapExample();
         hashTableExample();
@@ -32,9 +32,12 @@ class main{
         printDevider();
     }
 
-    public static void linkedListExample(List<Integer> arrList){
+    public static void linkedListExample(List<Integer> arrList, Integer[] arr){
         print("Linked list");
+
+        arrList = Arrays.asList(arr);
         LinkedList<Integer> linkedList = new LinkedList<>(arrList);
+
         print(linkedList);
         print(linkedList.pop());
         print(linkedList.pop());
@@ -49,10 +52,12 @@ class main{
             stack.push(temp);
         }
         print(stack);
-        System.out.println(stack.peek());
+        print(stack.peek());
         print(stack);
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
+
+        print(stack.pop());
+        print(stack.pop());
+
         print(stack);
         printDevider();
     }
@@ -64,7 +69,7 @@ class main{
         map.put(2, "bar");
         map.put(null, null);
         print(map);
-        System.out.println(map.get(2));
+        print(map.get(2));
         printDevider();
     }
 
@@ -75,7 +80,7 @@ class main{
         table.put(2, "bar");
         // table.put(null, null);
         print(table);
-        System.out.println(table.get(2));
+        print(table.get(2));
         printDevider();
     }
 
@@ -89,8 +94,8 @@ class main{
     public static void dateExample(){
         print("date");
         Date date = new Date();
-        System.out.println(date);
-        System.out.println(date.getTime());
+        print(date);
+        print(date.getTime());
         printDevider();
     }
 
@@ -127,7 +132,7 @@ class main{
 
     public static void propertiesExample() throws IOException {
         print("Properties");
-        FileReader reader = new FileReader("src/main/java/org/example/UntilLibrary/test.txt");
+        FileReader reader = new FileReader("src/main/resources/test.txt");
 
         Properties properties = new Properties();
         properties.load(reader);
@@ -137,22 +142,22 @@ class main{
         Iterator itr = tempSet.iterator();
         while(itr.hasNext()){
             Map.Entry entry=(Map.Entry)itr.next();
-            System.out.println(entry.getKey()+" = "+entry.getValue());
+            print(entry.getKey()+" = "+entry.getValue());
         }
 
         print(properties.getProperty("email"));
         print(properties.getProperty("password"));
 
-        properties.store(new FileWriter("src/main/java/org/example/UntilLibrary/test.txt"), "test");
+        properties.store(new FileWriter("src/main/resources/test.txt"), "test");
 
         printDevider();
-        System.out.println("XML loader");
-        FileInputStream xmlReader = new FileInputStream("src/main/java/org/example/UntilLibrary/test.xml");
+        print("XML loader");
+        FileInputStream xmlReader = new FileInputStream("src/main/resources/test.xml");
         Properties xmlProperties = new Properties();
         try{
             xmlProperties.loadFromXML(xmlReader);
 
-            xmlProperties.forEach((key, value) -> System.out.println(key + ": " + value));
+            xmlProperties.forEach((key, value) -> print(key + ": " + value));
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -161,7 +166,7 @@ class main{
         xmlProperties.setProperty("key4", "value4");
 
         try{
-            FileOutputStream output = new FileOutputStream("src/main/java/org/example/UntilLibrary/test.xml");
+            FileOutputStream output = new FileOutputStream("src/main/resources/test.xml");
             xmlProperties.storeToXML(output, "Done stored");
         }catch (Exception e){
             e.printStackTrace();
@@ -175,35 +180,35 @@ class main{
         Locale localeVn = new Locale("vn");
         ResourceBundle labelsUS = ResourceBundle.getBundle("lang/label", localeEn);
         ResourceBundle labelsVN = ResourceBundle.getBundle("lang/label", localeVn);
-        System.out.println(labelsUS.getString("GREETING"));
-        System.out.println(labelsVN.getString("GREETING"));
+        print(labelsUS.getString("GREETING"));
+        print(labelsVN.getString("GREETING"));
         printDevider();
     }
 
     public static void calenderExample(){
         print("Calender");
         Calendar calendar = Calendar.getInstance();
-        System.out.println("Now: " + calendar.getTime());
+        print("Now: " + calendar.getTime());
         calendar.add(Calendar.DATE, -15);
-        System.out.println("15 days: " + calendar.getTime());
+        print("15 days: " + calendar.getTime());
         calendar.add(Calendar.MONTH, 4);
-        System.out.println("4 months: " + calendar.getTime());
+        print("4 months: " + calendar.getTime());
         calendar.add(Calendar.YEAR, 2);
-        System.out.println("2 years: " + calendar.getTime());
+        print("2 years: " + calendar.getTime());
 
         Calendar calendarNOW = Calendar.getInstance();
-        System.out.println("YEAR: " + calendarNOW.get(Calendar.YEAR));
-        System.out.println("MONTH: " + calendarNOW.get(Calendar.MONTH));
-        System.out.println("DAY: " + calendarNOW.get(Calendar.DATE));
-        System.out.println("DAY_OF_WEEK: " + calendarNOW.get(Calendar.DAY_OF_WEEK));
+        print("YEAR: " + calendarNOW.get(Calendar.YEAR));
+        print("MONTH: " + calendarNOW.get(Calendar.MONTH));
+        print("DAY: " + calendarNOW.get(Calendar.DATE));
+        print("DAY_OF_WEEK: " + calendarNOW.get(Calendar.DAY_OF_WEEK));
 
-        System.out.println("DATE AND TIME: " + calendarNOW.getTime());
+        print("DATE AND TIME: " + calendarNOW.getTime());
 
         int maximum = calendarNOW.getMaximum(Calendar.DAY_OF_YEAR);
-        System.out.println(maximum);
+        print(maximum);
 
         int minimum = calendarNOW.getMinimum(Calendar.DAY_OF_YEAR);
-        System.out.println(minimum);
+        print(minimum);
         printDevider();
     }
 
@@ -236,6 +241,6 @@ class main{
     }
 
     public static void printDevider(){
-        System.out.println("==================");
+        print("==================");
     }
 }
