@@ -2,6 +2,8 @@ package org.example.Java8;
 
 import org.example.IOLibrary.Customer;
 
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -16,6 +18,7 @@ public class Main {
 //        streamExample2();
 //        optionalExample();
 //        parallelStreamAPIExample();
+        dateAndTimeAPIsExample();
 //        mapExample();
 //        testLambdaExpression();
     }
@@ -151,6 +154,42 @@ public class Main {
 
         System.out.println("FlatMapped Optional: " + flatMappedOptional.orElse("Default Value"));
         System.out.println("Mapped Nested Optional: " + nestedOptional.orElse(Optional.of("Default Value")));
+    }
+
+    public static void dateAndTimeAPIsExample(){
+        LocalDate currentDate = LocalDate.now();
+        System.out.println("Current Date: " + currentDate);
+
+        // Current time
+        LocalTime currentTime = LocalTime.now();
+        System.out.println("Current Time: " + currentTime);
+
+        // Current date and time
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        System.out.println("Current Date and Time: " + currentDateTime);
+
+        // Formatting date and time
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = currentDateTime.format(formatter);
+        System.out.println("Formatted Date and Time: " + formattedDateTime);
+
+        // Parsing a date string
+        String dateString = "2022-01-01";
+        LocalDate parsedDate = LocalDate.parse(dateString);
+        System.out.println("Parsed Date: " + parsedDate);
+
+        // Manipulating dates and times
+        LocalDate futureDate = currentDate.plusDays(7);
+        System.out.println("Date 7 days from now: " + futureDate);
+
+        LocalTime modifiedTime = currentTime.minusHours(2);
+        System.out.println("Time 2 hours ago: " + modifiedTime);
+
+//        Duration represents a duration of time at the nanosecond precision, while Period represents a period of time in terms of years, months, and days.
+        Duration duration = Duration.ofHours(3);
+        Period period = Period.ofWeeks(2);
+        System.out.println(duration.toMinutes());
+        System.out.println(period.getDays());
     }
 
     interface supplierDefault{

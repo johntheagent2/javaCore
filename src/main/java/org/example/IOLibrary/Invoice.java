@@ -16,7 +16,7 @@ public class Invoice {
 
         Template template = configuration.getTemplate("receipt.ftl");
 
-        // Data model (replace with your actual data)
+        // Data model (replace with actual data)
         Map<String, Object> data = new HashMap<>();
         data.put("customerName", customer.getName());
         data.put("customerAddress", customer.getAddress());

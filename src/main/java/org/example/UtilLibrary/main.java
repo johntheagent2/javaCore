@@ -7,35 +7,39 @@ class main{
     public static void main(String[] args) throws IOException {
 
         Integer[] arr = {1,1,0,2,3,4,5};
-        List<Integer> arrList = new ArrayList<>();
+        List<Integer> arrList;
+        arrList = Arrays.asList(arr);
 
-        listExample(arrList, arr);
-        linkedListExample(arrList, arr);
+
+        listExample(arr);
+        linkedListExample(arr);
         stackExample(arr);
         hashMapExample();
         hashTableExample();
         setExample(arrList);
+        dateExample();
         collectionsExample(arr ,arrList);
         vectorExample();
         propertiesExample();
         resourceBundleExample();
         calenderExample();
         enumExample();
+        iteratorExample();
     }
 
-    public static void listExample(List<Integer> arrList, Integer[] arr){
+    public static void listExample(Integer[] arr){
         print("array List");
-        arrList = Arrays.asList(arr);
+        List<Integer> arrList = Arrays.asList(arr);
 
         print(arrList.subList(0,3));
         print(arrList);
         printDevider();
     }
 
-    public static void linkedListExample(List<Integer> arrList, Integer[] arr){
+    public static void linkedListExample(Integer[] arr){
         print("Linked list");
 
-        arrList = Arrays.asList(arr);
+        List<Integer> arrList = Arrays.asList(arr);
         LinkedList<Integer> linkedList = new LinkedList<>(arrList);
 
         print(linkedList);
@@ -65,9 +69,11 @@ class main{
     public static void hashMapExample(){
         print("hash map");
         Map<Integer, String> map = new HashMap<>();
+
         map.put(1, "foo");
         map.put(2, "bar");
         map.put(null, null);
+
         print(map);
         print(map.get(2));
         printDevider();
@@ -76,17 +82,23 @@ class main{
     public static void hashTableExample(){
         print("hash table"); //no null key or value allowed
         Hashtable<Integer, String> table = new Hashtable<>();
+
         table.put(1, "foo");
         table.put(2, "bar");
         // table.put(null, null);
+
         print(table);
         print(table.get(2));
         printDevider();
     }
 
     public static void setExample(List<Integer> arrList){
+        print("set");
+
         Set<Integer> set = new HashSet<>();
+
         set.addAll(arrList);
+
         print(set);
         printDevider();
     }
@@ -103,29 +115,37 @@ class main{
         print("collections");
         Set<Integer> set2 = new HashSet<>();
 
-        Collections.addAll(set2, arr);
         Collections.sort(arrList);
         print(arrList);
+
         Collections.shuffle(arrList);
+
         print(arrList);
+
         Collections.sort(arrList);
 
         print(Collections.frequency(arrList, 1));
         print(arrList);
+
+        Collections.addAll(set2, arr);
         print(set2);
+
         printDevider();
     }
 
     public static void vectorExample(){
         print("Vector");
         Vector<Object> vector = new Vector<>();
+
         vector.add(1);
         vector.add(2);
         vector.add("Hello");
         vector.add(3);
 
         print(vector);
+
         vector.remove(1);
+
         print(vector);
         printDevider();
     }
@@ -140,6 +160,7 @@ class main{
         Set tempSet = properties.entrySet();
 
         Iterator itr = tempSet.iterator();
+
         while(itr.hasNext()){
             Map.Entry entry=(Map.Entry)itr.next();
             print(entry.getKey()+" = "+entry.getValue());
@@ -148,15 +169,18 @@ class main{
         print(properties.getProperty("email"));
         print(properties.getProperty("password"));
 
+        properties.setProperty("test", "test");
+
         properties.store(new FileWriter("src/main/resources/test.txt"), "test");
 
         printDevider();
+
         print("XML loader");
         FileInputStream xmlReader = new FileInputStream("src/main/resources/test.xml");
         Properties xmlProperties = new Properties();
+
         try{
             xmlProperties.loadFromXML(xmlReader);
-
             xmlProperties.forEach((key, value) -> print(key + ": " + value));
         }catch (Exception e){
             e.printStackTrace();
@@ -218,8 +242,12 @@ class main{
         print("Status number of " + statusCode.OK + " is " + statusCode.OK.getStatusNumber());
         printDevider();
 
+
+    }
+
+    public static void iteratorExample(){
         print("Iterator");
-        ArrayList<Integer> numbers = new ArrayList<Integer>();
+        ArrayList<Integer> numbers = new ArrayList<>();
         numbers.add(12);
         numbers.add(8);
         numbers.add(2);

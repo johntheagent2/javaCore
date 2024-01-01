@@ -14,24 +14,23 @@ public class Main {
         String fileNameCSV = "src/main/java/org/example/IOLibrary/files/outputCSV.csv";
         String fileNameExcel = "src/main/java/org/example/IOLibrary/files/outputExcel.xlsx";
         String fileNamePDF = "src/main/java/org/example/IOLibrary/files/invoice.pdf";
-        String HTMLtemplate = "templates/receipt.ftl";
         String sheetChosen = "sheet1";
         Customer customer = new Customer("CDP", "address1", 21);
 
         customerList.add(customer);
         customerList.add(new Customer("TTNA", "address2", 22));
         customerList.add(new Customer("VDC", "address3", 21));
-//
-//        normalInput();
-//        normalOutput();
-//        inputWithBuffer();
-//        outputWithBuffer();
-//
-//        writeToCSV(customerList, filenameCSV);
-//        readCSV(filenameCSV);
 
-//        writeToExcel(customerList, fileNameExcel);
-//        readExcel(fileNameExcel, sheetChosen);
+        normalInput();
+        normalOutput();
+        inputWithBuffer();
+        outputWithBuffer();
+
+        writeToCSV(customerList, fileNameCSV);
+        readCSV(fileNameCSV);
+
+        writeToExcel(customerList, fileNameExcel);
+        readExcel(fileNameExcel, sheetChosen);
 
         try {
             Invoice.createInvoice(customer, fileNamePDF);
@@ -144,50 +143,19 @@ public class Main {
         }finally {
             fis.close();
         }
-
-        FileOutputStream fos = null;
-        try{
-            fos = new FileOutputStream("src/main/java/org/example/IOLibrary/files/fos.txt");
-
-            String text = "Hello world! This is from FileOutputStream.";
-            byte[] bytes = text.getBytes();
-
-            fos.write(bytes);
-            fos.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            fos.close();
-        }
     }
 
     public static void normalOutput() throws IOException {
-        FileInputStream fis = null;
-        try{
-            fis = new FileInputStream("src/main/java/org/example/IOLibrary/files/fis.txt");
-            byte[] allByte = fis.readAllBytes();
-            for(byte currentByte : allByte){
-                System.out.print((char) currentByte);
-            }
-        }catch (Exception e){
-            System.out.println(e);
-        }finally {
-            fis.close();
-        }
 
-        FileOutputStream fos = null;
-        try{
-            fos = new FileOutputStream("src/main/java/org/example/IOLibrary/files/fos.txt");
+        try (FileOutputStream fos = new FileOutputStream("src/main/java/org/example/IOLibrary/files/fos.txt")) {
 
             String text = "Hello world! This is from FileOutputStream.";
             byte[] bytes = text.getBytes();
 
             fos.write(bytes);
             fos.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            fos.close();
         }
     }
 
