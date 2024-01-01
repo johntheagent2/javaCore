@@ -1,4 +1,4 @@
-package org.example.UntilLibrary;
+package org.example.UtilLibrary;
 
 enum statusCode {
     OK(200), NOT_FOUND(404);

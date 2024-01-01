@@ -1,4 +1,4 @@
-package org.example.UntilLibrary;
+package org.example.UtilLibrary;
 
 import java.io.*;
 import java.util.*;
@@ -7,16 +7,32 @@ class main{
     public static void main(String[] args) throws IOException {
 
         Integer[] arr = {1,1,0,2,3,4,5};
-
-        print("array List");
         List<Integer> arrList = new ArrayList<>();
-        
+
+        listExample(arrList, arr);
+        linkedListExample(arrList);
+        stackExample(arr);
+        hashMapExample();
+        hashTableExample();
+        setExample(arrList);
+        collectionsExample(arr ,arrList);
+        vectorExample();
+        propertiesExample();
+        resourceBundleExample();
+        calenderExample();
+        enumExample();
+    }
+
+    public static void listExample(List<Integer> arrList, Integer[] arr){
+        print("array List");
         arrList = Arrays.asList(arr);
 
         print(arrList.subList(0,3));
         print(arrList);
         printDevider();
+    }
 
+    public static void linkedListExample(List<Integer> arrList){
         print("Linked list");
         LinkedList<Integer> linkedList = new LinkedList<>(arrList);
         print(linkedList);
@@ -24,7 +40,9 @@ class main{
         print(linkedList.pop());
         print(linkedList);
         printDevider();
+    }
 
+    public static void stackExample(Integer[] arr){
         print("stack");
         Stack<Integer> stack = new Stack<>();
         for(Integer temp : arr){
@@ -37,7 +55,9 @@ class main{
         System.out.println(stack.pop());
         print(stack);
         printDevider();
+    }
 
+    public static void hashMapExample(){
         print("hash map");
         Map<Integer, String> map = new HashMap<>();
         map.put(1, "foo");
@@ -46,7 +66,9 @@ class main{
         print(map);
         System.out.println(map.get(2));
         printDevider();
+    }
 
+    public static void hashTableExample(){
         print("hash table"); //no null key or value allowed
         Hashtable<Integer, String> table = new Hashtable<>();
         table.put(1, "foo");
@@ -55,19 +77,24 @@ class main{
         print(table);
         System.out.println(table.get(2));
         printDevider();
+    }
 
-        print("Set");
+    public static void setExample(List<Integer> arrList){
         Set<Integer> set = new HashSet<>();
         set.addAll(arrList);
         print(set);
         printDevider();
+    }
 
+    public static void dateExample(){
         print("date");
         Date date = new Date();
-        System.out.println(date.toString());
+        System.out.println(date);
         System.out.println(date.getTime());
         printDevider();
-        
+    }
+
+    public static void collectionsExample(Integer[] arr, List<Integer> arrList){
         print("collections");
         Set<Integer> set2 = new HashSet<>();
 
@@ -82,9 +109,11 @@ class main{
         print(arrList);
         print(set2);
         printDevider();
+    }
 
+    public static void vectorExample(){
         print("Vector");
-        Vector vector = new Vector<>();
+        Vector<Object> vector = new Vector<>();
         vector.add(1);
         vector.add(2);
         vector.add("Hello");
@@ -94,20 +123,22 @@ class main{
         vector.remove(1);
         print(vector);
         printDevider();
+    }
 
+    public static void propertiesExample() throws IOException {
         print("Properties");
         FileReader reader = new FileReader("src/main/java/org/example/UntilLibrary/test.txt");
 
         Properties properties = new Properties();
         properties.load(reader);
 
-        Set tempSet = properties.entrySet();  
+        Set tempSet = properties.entrySet();
 
-        Iterator itr = tempSet.iterator();  
-        while(itr.hasNext()){  
-            Map.Entry entry=(Map.Entry)itr.next();  
-            System.out.println(entry.getKey()+" = "+entry.getValue());  
-        }  
+        Iterator itr = tempSet.iterator();
+        while(itr.hasNext()){
+            Map.Entry entry=(Map.Entry)itr.next();
+            System.out.println(entry.getKey()+" = "+entry.getValue());
+        }
 
         print(properties.getProperty("email"));
         print(properties.getProperty("password"));
@@ -135,10 +166,10 @@ class main{
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
         printDevider();
+    }
 
+    public static void resourceBundleExample(){
         print("Resource Bundle");
         Locale localeEn = new Locale("en");
         Locale localeVn = new Locale("vn");
@@ -147,7 +178,9 @@ class main{
         System.out.println(labelsUS.getString("GREETING"));
         System.out.println(labelsVN.getString("GREETING"));
         printDevider();
+    }
 
+    public static void calenderExample(){
         print("Calender");
         Calendar calendar = Calendar.getInstance();
         System.out.println("Now: " + calendar.getTime());
@@ -172,7 +205,9 @@ class main{
         int minimum = calendarNOW.getMinimum(Calendar.DAY_OF_YEAR);
         System.out.println(minimum);
         printDevider();
+    }
 
+    public static void enumExample(){
         print("ENUM");
         print("Status number of " + statusCode.NOT_FOUND + " is " + statusCode.NOT_FOUND.getStatusNumber());
         print("Status number of " + statusCode.OK + " is " + statusCode.OK.getStatusNumber());
@@ -184,7 +219,7 @@ class main{
         numbers.add(8);
         numbers.add(2);
         numbers.add(23);
-    
+
         Iterator<Integer> iter = numbers.iterator();
 
         while(iter.hasNext()){
@@ -194,7 +229,6 @@ class main{
             }
         }
         print(numbers);
-        
     }
 
     public static void print(Object object){
