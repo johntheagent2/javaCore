@@ -1,4 +1,4 @@
-package org.example.Synchronization;
+package org.example.SynchronizationAndConcurrence;
 
 import java.util.List;
 

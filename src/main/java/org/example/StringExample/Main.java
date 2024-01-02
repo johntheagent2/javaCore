@@ -1,13 +1,11 @@
 package org.example.StringExample;
 
-import org.example.Synchronization.AddToList;
-
 public class Main {
     public static void main(String[] args){
         StringBuffer stringBuffer= new StringBuffer();
         StringBuilder stringBuilder = new StringBuilder();
 
-        int n=10;
+        int n=20;
 
         Thread thread1 = new Thread(new StringMultiThread(stringBuffer, stringBuilder, n, 1));
         Thread thread2 = new Thread(new StringMultiThread(stringBuffer, stringBuilder, n, 2));

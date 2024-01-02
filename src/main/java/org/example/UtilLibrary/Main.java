@@ -3,7 +3,7 @@ package org.example.UtilLibrary;
 import java.io.*;
 import java.util.*;
 
-class main{
+class Main{
     public static void main(String[] args) throws IOException {
 
         Integer[] arr = {1,1,0,2,3,4,5};

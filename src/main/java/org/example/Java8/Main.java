@@ -13,17 +13,17 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-//        functionalInterfaceExample();
+        functionalInterfaceExample();
 //        streamExample1();
 //        streamExample2();
 //        optionalExample();
 //        parallelStreamAPIExample();
-        dateAndTimeAPIsExample();
+//        dateAndTimeAPIsExample();
 //        mapExample();
-//        testLambdaExpression();
+//        methodReferencesExample();
     }
 
-    public static void testLambdaExpression(){
+    public static void methodReferencesExample(){
 //        Reference to a Static Method
         Function<String, String> myFunc = functionalReferenceExample::sayBye;
         System.out.println(myFunc.apply("Bob"));
@@ -84,7 +84,6 @@ public class Main {
         for(int i = 0; i < 10000; i++){
             listOfNumbers.add(i);
         }
-
 
         long startTimeParallel = System.currentTimeMillis();
         List<String> parallelStringList = listOfNumbers.parallelStream()
@@ -263,34 +262,52 @@ public class Main {
     }
 
     public static void functionalInterfaceExample(){
-        Animal cat = (soundType, repetitions) -> {
-            for(int i = 0; i < repetitions; i++){
-                System.out.println(soundType);
+        Animal cat = () -> {
+            for(int i = 0; i < 2; i++){
+                System.out.println("meow");
             }
         };
-        cat.makeSound("meow", 2);
+        Runnable makeSound = cat::makeSound;
+        makeSound.run();
         cat.move();
-        Animal.comeAlive();
 
-        Animal bob = new Human();
-        bob.makeSound("hi", 3);
+//        reference to a static method
+        Runnable comeAlive = Animal::comeAlive;
+        comeAlive.run();
+
+        Animal bob = new Human("hi", 2);
+        bob.makeSound();
         bob.move();
     }
 }
 
 class Human implements Animal{
+
+    String sound;
+    int repetitions;
+
+    public Human(String s, int i) {
+        this.sound = s;
+        this.repetitions = i;
+    }
+
     @Override
-    public void makeSound(String sound, int repetitions) {
+    public void makeSound() {
         for(int i = 0; i < repetitions; i++){
             System.out.println(sound);
         }
     }
+
+    public void move() {
+        System.out.println("The human is moving.");
+    }
+
 }
 
 @FunctionalInterface
 interface Animal {
     // Abstract method
-    void makeSound(String sound, int repetitions);
+    void makeSound();
 
     // Default method
     default void move() {
