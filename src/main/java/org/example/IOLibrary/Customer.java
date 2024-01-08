@@ -36,7 +36,7 @@ public class Customer {
     }
 
     public void introduce(){
-        System.out.println("My name is " + this.name + " and I'm " + this.age);
+        System.out.println("My name is " + this.name + " and I'm " + this.age + " my address is " + this.address);
     }
 
 }

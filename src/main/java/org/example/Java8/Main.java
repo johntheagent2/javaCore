@@ -5,18 +5,16 @@ import org.example.IOLibrary.Customer;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Function;
+import java.util.function.*;
 import java.util.random.RandomGenerator;
 import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        functionalInterfaceExample();
-//        streamExample1();
-//        streamExample2();
-//        optionalExample();
+//        functionalInterfaceExample();
+        streamExample1();
+        streamExample2();
+        optionalExample();
 //        parallelStreamAPIExample();
 //        dateAndTimeAPIsExample();
 //        mapExample();
@@ -155,6 +153,16 @@ public class Main {
         System.out.println("Mapped Nested Optional: " + nestedOptional.orElse(Optional.of("Default Value")));
     }
 
+    public String getSound(Human human){
+
+
+        Optional<String> isHumanHasThreeReps = Optional.ofNullable(human)
+                .filter(humanCurrent -> humanCurrent.repetitions > 3)
+                .map(human1 -> human1.sound + " has three or higher reps");
+
+        return isHumanHasThreeReps.get();
+    }
+
     public static void dateAndTimeAPIsExample(){
         LocalDate currentDate = LocalDate.now();
         System.out.println("Current Date: " + currentDate);
@@ -231,11 +239,22 @@ public class Main {
     }
 
     public static void streamExample1(){
+        String address = "address5";
         List<Customer> customers =  new ArrayList<>();
         customers.add(new Customer("Cao Duc Phat", "address1", 21));
         customers.add(new Customer("Nguyen Van A", "address2", 18));
         customers.add(new Customer("Ta Thi Ngoc Anh", "address3", 22));
         customers.add(new Customer("Tran Van Tuan Quoc", "address4", 30));
+
+        Consumer<Customer> getEachCustomer = (Customer::introduce);
+        Predicate<Customer> isCustomerAgeSmallerThanThirty = customer -> customer.getAge() < 30;
+        BiConsumer<Customer, String> setCustomerAddress = Customer::setAddress;
+
+        customers.stream()
+                .filter(isCustomerAgeSmallerThanThirty)
+                .peek((customer) -> setCustomerAddress.accept(customer, address))
+                .sorted(Comparator.comparingInt(Customer::getAge).thenComparing(Comparator.comparing(Customer::getName)))
+                .forEach((getEachCustomer));
 
         List<Customer> genZCustomers = customers.stream()
                 .filter(customer -> customer.getAge() < 30)

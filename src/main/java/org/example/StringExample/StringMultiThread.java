@@ -27,7 +27,7 @@ public class StringMultiThread implements Runnable{
 
             // Add an element to the shared list
             stringBuffer.append(i);
-            stringBuilder.append(i);
+//            stringBuilder.append(i);
         }
         System.out.println("Thread ID: " + turn + " is done!");
     }

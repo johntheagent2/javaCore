@@ -19,10 +19,10 @@ public class Invoice {
         // Data model (replace with actual data)
         Map<String, Object> data = new HashMap<>();
         data.put("customerName", customer.getName());
-        data.put("customerAddress", customer.getAddress());
+        data.put("customerAddress", "24a bau cat");
         data.put("invoiceNumber", "CI-"+123);
         Date currentDate = new Date();
-        data.put("invoiceDate", currentDate.toInstant().toString());
+        data.put("invoiceDate", "1/4/2024");
 
 
         List<Map<String, String>> items = List.of(

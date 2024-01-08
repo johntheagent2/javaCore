@@ -14,29 +14,30 @@ public class Main {
         String fileNameCSV = "src/main/java/org/example/IOLibrary/files/outputCSV.csv";
         String fileNameExcel = "src/main/java/org/example/IOLibrary/files/outputExcel.xlsx";
         String fileNamePDF = "src/main/java/org/example/IOLibrary/files/invoice.pdf";
-        String sheetChosen = "sheet1";
+        String sheetChosen = "sheet2";
 
         Customer customer = new Customer("CDP", "address1", 21);
         customerList.add(customer);
         customerList.add(new Customer("TTNA", "address2", 22));
         customerList.add(new Customer("VDC", "address3", 21));
+        customerList.add(new Customer("ABC", "address7", 29));
 
-        normalInput();
-        normalOutput();
-        inputWithBuffer();
-        outputWithBuffer();
+//        normalInput();
+//        normalOutput();
+//        inputWithBuffer();
+//        outputWithBuffer();
 
-        writeToCSV(customerList, fileNameCSV);
-        readCSV(fileNameCSV);
+//        writeToCSV(customerList, fileNameCSV);
+//        readCSV(fileNameCSV);
 
-        writeToExcel(customerList, fileNameExcel);
+//        writeToExcel(customerList, fileNameExcel);
         readExcel(fileNameExcel, sheetChosen);
-
-        try {
-            Invoice.createInvoice(customer, fileNamePDF);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//
+//        try {
+//            Invoice.createInvoice(customer, fileNamePDF);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
 
@@ -204,8 +205,8 @@ public class Main {
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            fosStream.close();
             bos.close();
+            fosStream.close();
         }
     }
 }

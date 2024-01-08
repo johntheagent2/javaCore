@@ -10,7 +10,7 @@ public class Main {
 
         // Create a shared list
         List<Integer> sharedList = new ArrayList<>();
-        sharedList = Collections.synchronizedList(sharedList);
+//        sharedList = Collections.synchronizedList(sharedList);
 
         Set<Integer> sharedSet = new HashSet<>();
 //        sharedSet = Collections.synchronizedSet(sharedSet);
@@ -25,11 +25,11 @@ public class Main {
         int n = 30;
 
 
-//        // Create four threads that add elements to the list
-        Thread thread1 = new Thread(new AddToList(sharedList, n, 1));
-        Thread thread2 = new Thread(new AddToList(sharedList, n, 2));
-        Thread thread3 = new Thread(new AddToList(sharedList, n, 3));
-        Thread thread4 = new Thread(new AddToList(sharedList, n, 4));
+////        // Create four threads that add elements to the list
+//        Thread thread1 = new Thread(new AddToList(sharedList, n, 1));
+//        Thread thread2 = new Thread(new AddToList(sharedList, n, 2));
+//        Thread thread3 = new Thread(new AddToList(sharedList, n, 3));
+//        Thread thread4 = new Thread(new AddToList(sharedList, n, 4));
 
 //         Create four threads that add elements to the set
 //        Thread thread1 = new Thread(new AddToSet(sharedSet, n, 1));
@@ -51,10 +51,10 @@ public class Main {
 
 
 //        // Create four threads that add elements to copy on write list
-//        Thread thread1 = new Thread(new AddToList(copyOnWriteArrayList, n, 1));
-//        Thread thread2 = new Thread(new AddToList(copyOnWriteArrayList, n, 2));
-//        Thread thread3 = new Thread(new AddToList(copyOnWriteArrayList, n, 3));
-//        Thread thread4 = new Thread(new AddToList(copyOnWriteArrayList, n, 4));
+        Thread thread1 = new Thread(new AddToList(copyOnWriteArrayList, n, 1));
+        Thread thread2 = new Thread(new AddToList(copyOnWriteArrayList, n, 2));
+        Thread thread3 = new Thread(new AddToList(copyOnWriteArrayList, n, 3));
+        Thread thread4 = new Thread(new AddToList(copyOnWriteArrayList, n, 4));
 
 //Create four threads that add elements to copy on write set
 //        Thread thread1 = new Thread(new AddToSet(sharedSet, n, 1));
@@ -79,8 +79,8 @@ public class Main {
         }
 
         // Print the final contents of the list
-        System.out.println("Final: " + sharedList);
-        System.out.println("Size: " + sharedList.size());
+        System.out.println("Final: " + copyOnWriteArrayList);
+        System.out.println("Size: " + copyOnWriteArrayList.size());
 
     }
 }

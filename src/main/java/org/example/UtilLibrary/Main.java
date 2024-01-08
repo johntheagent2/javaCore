@@ -152,7 +152,7 @@ class Main{
 
     public static void propertiesExample() throws IOException {
         print("Properties");
-        FileReader reader = new FileReader("src/main/resources/test.txt");
+        FileReader reader = new FileReader("src/main/resources/test.properties");
 
         Properties properties = new Properties();
         properties.load(reader);
@@ -170,8 +170,9 @@ class Main{
         print(properties.getProperty("password"));
 
         properties.setProperty("test", "test");
+        properties.setProperty("email", "caophat113@gmail.com");
 
-        properties.store(new FileWriter("src/main/resources/test.txt"), "test");
+        properties.store(new FileWriter("src/main/resources/test.properties"), "test");
 
         printDevider();
 
